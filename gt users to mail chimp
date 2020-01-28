@@ -1,0 +1,95 @@
+SELECT
+
+	u_id as 'User Id',
+	u_login as 'Login',
+	u_email as 'Email',
+		CONVERT(CONVERT(CONVERT(p_first_name USING latin1) USING binary) USING UTF8) as 'First Name',
+		CONVERT(CONVERT(CONVERT(p_last_name USING latin1) USING binary) USING UTF8) as 'Last Name',
+		p_phone as 'Phone',
+		CONVERT(CONVERT(CONVERT(p_city USING latin1) USING binary) USING UTF8) as 'City',
+		CONVERT(CONVERT(CONVERT(p_street USING latin1) USING binary) USING UTF8) as 'Street',
+		p_zipcode as 'Zip Code',
+		u_birth_year as 'User Birthday Year',
+		DATE_FORMAT(u_activated_at, '%Y') AS 'Activation Year',
+		DATE_FORMAT(u_activated_at, '%m') AS 'Activation Month',
+		DATE_FORMAT(u_activated_at, '%d/%m') AS 'Activation Birthday',
+		(case when u_fb_user_id is not null Then 'Yes' else 'No' end) As 'Facebook Account',
+		(case when p_xbox_gamertag is not null then 'Yes' else 'No' end) As 'XBOX Network',
+		(case when p_psn_id is not null then 'Yes' else 'No' end) As 'PSN Network',
+	u_owned_games_count as 'Count of owned games',
+	u_posts_count as 'Count of Posts',
+	u_positive_user_ratings_count as 'Positive ratings',
+	u_negative_user_ratings_count as 'Negative ratings',
+	u_user_platforms_count as 'Count of users Platforms',
+	p_bank_account as 'Bank Account',
+	(case 
+				when p_bank_code ='101' then 'Narodowy Bank Polski'
+				when p_bank_code ='102' then 'PKO BP'
+				when p_bank_code ='103' then 'Bank Handlowy (Citi Handlowy)'
+				when p_bank_code ='105' then 'ING'
+				when p_bank_code ='106' then 'BPH'
+				when p_bank_code ='109' then 'BZ WBK'
+				when p_bank_code ='113' then 'BGK'
+				when p_bank_code ='114' then 'mBank'
+				when p_bank_code ='116' then 'Bank Millennium'
+				when p_bank_code ='124' then 'Pekao'
+				when p_bank_code ='128' then 'HSBC'
+				when p_bank_code ='132' then 'Bank Pocztowy'
+				when p_bank_code ='147' then 'Eurobank'
+				when p_bank_code ='154' then 'BOŚ'
+				when p_bank_code ='158' then 'Mercedes-Benz Bank Polska'
+				when p_bank_code ='161' then 'SGB - Bank'
+				when p_bank_code ='167' then 'RBS Bank (Polska)'
+				when p_bank_code ='168' then 'Plus Bank'
+				when p_bank_code ='175' then 'Raiffeisen Bank'
+				when p_bank_code ='184' then 'Societe Generale'
+				when p_bank_code ='187' then 'Nest Bank'
+				when p_bank_code ='191' then 'Deutsche Bank Polska'
+				when p_bank_code ='193' then 'Bank Polskiej Spółdzielczości'
+				when p_bank_code ='194' then 'Credit Agricole Bank Polska'
+				when p_bank_code ='195' then 'Idea Bank'
+				when p_bank_code ='203' then 'BGŻ BNP Paribas'
+				when p_bank_code ='207' then 'FCE Bank Polska'
+				when p_bank_code ='212' then 'Santander Consumer Bank'
+				when p_bank_code ='213' then 'Volkswagen Bank'
+				when p_bank_code ='214' then 'Fiat Bank Polska'
+				when p_bank_code ='216' then 'Toyota Bank'
+				when p_bank_code ='219' then 'DnB Nord'
+				when p_bank_code ='248' then 'Getin Noble Bank'
+				when p_bank_code ='249' then 'Alior Bank'
+	 else null end) AS 'Bank ID',
+	p_company_name as 'Company',
+		(case when pl_name = 'PlayStation 4' then 'Yes' else null end) as 'PlayStation 4',
+		(case when pl_name = 'Playstation 3' then 'Yes' else null end) as 'Playstation 3',
+		(case when pl_name = 'Playstation 2' then 'Yes' else null end) as 'Playstation 2',
+		(case when pl_name = 'Playstation' then 'Yes' else null end) as 'Playstation',
+		(case when pl_name = 'Xbox One' then 'Yes' else null end) as 'Xbox One',
+		(case when pl_name = 'Xbox 360' then 'Yes' else null end) as 'Xbox 360',
+		(case when pl_name = 'Xbox' then 'Yes' else null end) as 'Xbox',
+		(case when pl_name = 'PC' then 'Yes' else null end) as 'PC',
+		(case when pl_name = 'Playstation Vita' then 'Yes' else null end) as 'Playstation Vita',
+		(case when pl_name = 'PSP' then 'Yes' else null end) as 'PSP',
+		(case when pl_name = 'Dreamcast' then 'Yes' else null end) as 'Dreamcast',
+		(case when pl_name = 'Sega Saturn' then 'Yes' else null end) as 'Sega Saturn',
+		(case when pl_name = 'Game Boy' then 'Yes' else null end) as 'Game Boy',
+		(case when pl_name = 'Game Boy Advance' then 'Yes' else null end) as 'Game Boy Advance',
+		(case when pl_name = 'Game Boy Color' then 'Yes' else null end) as 'Game Boy Color',
+		(case when pl_name = 'GameCube' then 'Yes' else null end) as 'GameCube',
+		(case when pl_name = 'Nintendo 3DS' then 'Yes' else null end) as 'Nintendo 3DS',
+		(case when pl_name = 'Nintendo 64' then 'Yes' else null end) as 'Nintendo 64',
+		(case when pl_name = 'Nintendo DS' then 'Yes' else null end) as 'Nintendo DS',
+		(case when pl_name = 'Nintendo Wii' then 'Yes' else null end) as 'Nintendo Wii',
+		(case when pl_name = 'Nintendo Wii U' then 'Yes' else null end) as 'Nintendo Wii U',
+		(case when pl_name = 'SNES' then 'Yes' else null end) as 'SNES',
+		(case when pl_name = 'Switch' then 'Yes' else null end) as 'Switch',
+		(case when pl_name = 'inna' then 'Yes' else null end) as 'inna'
+	
+	
+
+
+FROM
+	production.all_users
+
+where u_email not like '%first.gov.pl' and u_email not like '%.first.edu.pl';
+
+Group By u_id;
